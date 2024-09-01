@@ -9,6 +9,7 @@ import { FETCH_TRACK_INFO_INTERVAL, DEFAULT_TRACK_INFO, AUDIO_STREAM_URL, AUDIO_
 import AudioVisualizer from "./audio-visualizer/audioVisualizer";
 import { NAME } from "../../constants/branding";
 import { formatTrackArtist, formatTrackTitle } from "../../utils/formatting";
+import { useClassNames } from "@prozilla-os/core";
 
 export interface TrackInfo {
 	track: {
@@ -102,7 +103,7 @@ export default function Player({ ...props }) {
 	const trackArtist = formatTrackArtist(trackInfo?.track.artist ?? DEFAULT_TRACK_INFO.artist) as string;
 	const streamer = trackInfo?.streamer?.is_live ? trackInfo?.streamer?.name : null;
 
-	return <div className={styles.Container} {...props}>
+	return <div className={useClassNames([styles.Container], "BlissRadio", "Player")} {...props}>
 		<span className={isPlaying ? styles["Track-info"] : `${styles["Track-info"]} ${styles.Paused}`}>
 			{streamer
 				? <p className={styles["Track-caption"]}><b>{streamer}</b> is on air</p>

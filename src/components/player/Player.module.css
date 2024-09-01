@@ -36,7 +36,7 @@
 	font-weight: 600;
 }
 
-.Track-cover-button {
+.Track-info .Track-cover-button {
 	position: relative;
 	width: min(250px, calc(100vw - 5rem));
 	height: min(250px, calc(100vw - 5rem));
@@ -48,11 +48,11 @@
 	transition: scale 400ms ease 150ms;
 }
 
-.Track-cover-button:hover {
+.Track-info .Track-cover-button:hover {
 	scale: 105%;
 }
 
-.Track-cover-button > svg {
+.Track-info .Track-cover-button > svg {
 	opacity: 0;
 	position: absolute;
 	top: 50%;
@@ -65,7 +65,7 @@
 	transition: opacity 400ms ease 150ms;
 }
 
-.Track-cover-button:hover > svg {
+.Track-info .Track-cover-button:hover > svg {
 	opacity: 1;
 }
 

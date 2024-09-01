@@ -1,4 +1,4 @@
-:root {
+.ProzillaOS-BlissRadio_Player {
 	--foreground-hsl-a: 0, 0%, 100%;
 	--foreground-hsl-b: 0, 0%, 80%;
 	--foreground-hsl-c: 220, 10%, 65%;
@@ -28,54 +28,34 @@
 	--total-header-height: calc(var(--header-height) + var(--header-margin-vertical) * 2);
 }
 
-* {
+.ProzillaOS-BlissRadio_Player * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
 }
 
-html, body, body > div, body > div > div {
-	flex-grow: 1;
-	display: flex;
-	gap: 0;
-	flex-direction: column;
-	width: 100%;
-	min-height: 100%;
-}
-
-html, body {
-	max-width: 100vw;
-	overflow-x: hidden;
-	color: hsl(var(--foreground-hsl-a));
-	background-color: hsl(var(--secondary-accent-hsl-e));
-	font-family: var(--body-font-family);
-}
-
-html {
-	font-size: 18px;
-}
-
-body {
-	margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
+.ProzillaOS-BlissRadio_Player h1,
+.ProzillaOS-BlissRadio_Player h2,
+.ProzillaOS-BlissRadio_Player h3,
+.ProzillaOS-BlissRadio_Player h4,
+.ProzillaOS-BlissRadio_Player h5,
+.ProzillaOS-BlissRadio_Player h6 {
 	font-family: var(--header-font-family);
 	font-weight: 700;
 	line-height: 1.3;
 }
 
-a {
+.ProzillaOS-BlissRadio_Player a {
 	color: inherit;
 	text-decoration: none;
 	transition: 300ms ease-in-out;
 }
 
-a:hover {
+.ProzillaOS-BlissRadio_Player a:hover {
 	color: hsl(var(--primary-accent-hsl-a));
 }
 
-button {
+.ProzillaOS-BlissRadio_Player button {
 	margin: 0;
 	border: none;
 	outline: none;
@@ -84,12 +64,12 @@ button {
 	user-select: none;
 }
 
-.svg-inline--fa {
+.ProzillaOS-BlissRadio_Player .svg-inline--fa {
 	height: 100% !important;
 	width: auto;
 }
 
-*::selection {
+.ProzillaOS-BlissRadio_Player *::selection {
 	color: hsl(var(--foreground-hsl-a));
 	background-color: hsl(var(--secondary-accent-hsl-b));
 }
