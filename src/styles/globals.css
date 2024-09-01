@@ -21,11 +21,6 @@
 
 	--max-page-width: 1320px;
 	--horizontal-page-margin: 2rem;
-
-	--header-height: 6rem;
-	--header-margin-horizontal: 1rem;
-	--header-margin-vertical: 1rem;
-	--total-header-height: calc(var(--header-height) + var(--header-margin-vertical) * 2);
 }
 
 .ProzillaOS-BlissRadio_Player * {

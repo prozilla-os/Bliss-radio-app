@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import styles from "./audioVisualizer.module.css";
 import { CANONICAL } from "../../../constants/meta";
 
 interface AudioVisualizerProps {
 	audio: HTMLAudioElement | null;
+	containerRef: MutableRefObject<HTMLDivElement | null>;
 }
 
 const HORIZONTAL_SCALE = 1.5;
@@ -18,14 +19,14 @@ const FREQUENCY_DATA_OFFSET = 0;
 
 const COLOR = "hsl(220, 12.5%, 6.25%)";
 	
-export default function AudioVisualizer({ audio }: AudioVisualizerProps) {
+export default function AudioVisualizer({ audio, containerRef }: AudioVisualizerProps) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const audioContextRef = useRef<AudioContext | null>(null);
 	const analyserNodeRef = useRef<AnalyserNode | null>(null);
 	const dataArrayRef = useRef<Uint8Array | null>(null);
 
 	useEffect(() => {
-		if (canvasRef.current == null || audio == null) return;
+		if (canvasRef.current == null || audio == null || containerRef.current == null) return;
 
 		const canvas = canvasRef.current;
 
@@ -39,8 +40,11 @@ export default function AudioVisualizer({ audio }: AudioVisualizerProps) {
 		};
 
 		const resize = () => {
-			const actualCanvasWidth = window.innerWidth;
-			const actualCanvasHeight = window.innerWidth / ASPECT_RATIO;
+			if (containerRef.current == null)
+				return;
+
+			const actualCanvasWidth = containerRef.current.clientWidth;
+			const actualCanvasHeight = containerRef.current.clientWidth / ASPECT_RATIO;
 
 			canvas.style.width = `${actualCanvasWidth}px`;
 			canvas.style.height = `${actualCanvasHeight}px`;
@@ -52,7 +56,6 @@ export default function AudioVisualizer({ audio }: AudioVisualizerProps) {
 			canvas.height = actualCanvasHeight * pixelRatio;
 		};
 
-		window.addEventListener("resize", resize);
 		resize();
 
 		if (!audioContextRef.current) {
@@ -78,6 +81,9 @@ export default function AudioVisualizer({ audio }: AudioVisualizerProps) {
 
 				node.port.onmessage = () => {
 					if (canvasRef.current) {
+						if (containerRef.current?.clientWidth != canvasWidth / HORIZONTAL_SCALE)
+							resize();
+
 						const context = canvasRef.current.getContext("2d");
 						if (context && dataArrayRef.current) {
 							analyserNode.getByteFrequencyData(dataArrayRef.current);
@@ -140,14 +146,12 @@ export default function AudioVisualizer({ audio }: AudioVisualizerProps) {
 		}
 
 		return () => {
-			window.removeEventListener("resize", resize);
-
 			if (audioContextRef.current) {
 				audioContextRef.current.close();
 				audioContextRef.current = null;
 			}
 		};
-	}, [audio]);
+	}, [audio, containerRef]);
 	
 	return <canvas className={styles.Visualizer} ref={canvasRef}></canvas>;
 };

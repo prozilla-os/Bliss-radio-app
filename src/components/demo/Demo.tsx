@@ -1,8 +1,15 @@
-import { ProzillaOS } from "@prozilla-os/core";
-import { BlissRadio } from "../BlissRadio";
+import { Desktop, ModalsView, ProzillaOS, Taskbar, WindowsView } from "@prozilla-os/core";
+import { appsConfig } from "../../config/demo/apps.config";
 
 export function Demo() {
-	return <ProzillaOS>
-		<BlissRadio/>
+	return <ProzillaOS
+		config={{
+			apps: appsConfig
+		}}
+	>
+		<Taskbar/>
+		<WindowsView/>
+		<ModalsView/>
+		<Desktop/>
 	</ProzillaOS>;
 }

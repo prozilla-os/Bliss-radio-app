@@ -1,5 +1,11 @@
 # @prozilla-os/bliss-radio
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated look
+
 ## 1.0.2
 
 ### Patch Changes

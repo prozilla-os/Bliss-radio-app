@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Player.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,6 +38,7 @@ function updateMetadata(title: string | null, artist: string | null, album: stri
 }
 
 export default function Player({ ...props }) {
+	const ref = useRef<HTMLDivElement>(null);
 	const [trackInfo, setTrackInfo] = useState<TrackInfo | null>(null);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
@@ -103,8 +104,8 @@ export default function Player({ ...props }) {
 	const trackArtist = formatTrackArtist(trackInfo?.track.artist ?? DEFAULT_TRACK_INFO.artist) as string;
 	const streamer = trackInfo?.streamer?.is_live ? trackInfo?.streamer?.name : null;
 
-	return <div className={useClassNames([styles.Container], "BlissRadio", "Player")} {...props}>
-		<span className={isPlaying ? styles["Track-info"] : `${styles["Track-info"]} ${styles.Paused}`}>
+	return <div ref={ref} className={useClassNames([styles.Container], "BlissRadio", "Player")} {...props}>
+		<div className={isPlaying ? styles["Track-info"] : `${styles["Track-info"]} ${styles.Paused}`}>
 			{streamer
 				? <p className={styles["Track-caption"]}><b>{streamer}</b> is on air</p>
 				: null
@@ -116,9 +117,11 @@ export default function Player({ ...props }) {
 					: <FontAwesomeIcon icon={faPlay}/>
 				}
 			</button>
-			<p className={`${styles["Track-artist"]} ${utilStyles.Header}`}>{trackTitle}</p>
-			<p className={`${styles["Track-title"]} ${utilStyles.Header}`}>{trackArtist}</p>
-		</span>
+			<span className={styles["Track-details"]}>
+				<p className={`${styles["Track-artist"]} ${utilStyles.Header}`}>{trackTitle}</p>
+				<p className={`${styles["Track-title"]} ${utilStyles.Header}`}>{trackArtist}</p>
+			</span>
+		</div>
 		<div className={styles["Controls"]}>
 			<button aria-label={isPlaying ? "Pause" : "Play"} onClick={handlePlayPause}>
 				{isPlaying
@@ -128,7 +131,7 @@ export default function Player({ ...props }) {
 			</button>
 			<Volume audio={audio}/>
 		</div>
-		<AudioVisualizer audio={audio}/>
+		<AudioVisualizer audio={audio} containerRef={ref}/>
 		<BackgroundImage src={trackCoverUrl}/>
 	</div>;
 }

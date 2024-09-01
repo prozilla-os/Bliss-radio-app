@@ -2,11 +2,11 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	background: hsl(var(--background-hsl-a));
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
 }
 
 .Track-info, .Controls {
@@ -15,12 +15,13 @@
 
 .Track-info {
 	display: flex;
-	gap: 0.5rem;
-	flex-direction: column;
-	justify-content: center;
+	gap: 2rem;
+	flex-direction: row;
+	justify-content: flex-start;
 	align-items: center;
-	margin: 0 3rem;
-	max-width: calc(100vw - 5rem);
+	padding: 0 4.5rem;
+	width: 100%;
+	height: 100%;
 }
 
 .Track-caption {
@@ -38,14 +39,15 @@
 
 .Track-info .Track-cover-button {
 	position: relative;
-	width: min(250px, calc(100vw - 5rem));
-	height: min(250px, calc(100vw - 5rem));
+	width: 200px;
+	height: 200px;
 	margin: 1rem 0;
 	border-radius: 9999px;
 	box-shadow: 0.5rem 0.5rem 1rem -0.5rem hsl(var(--background-hsl-a));
 	cursor: pointer;
 	scale: 100%;
 	transition: scale 400ms ease 150ms;
+	aspect-ratio: 1;
 }
 
 .Track-info .Track-cover-button:hover {
@@ -93,11 +95,19 @@
 	}
 }
 
+.Track-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
 .Track-artist, .Track-title {
 	max-width: 100%;
-	text-align: center;
+	text-align: left;
 	word-wrap: break-word;
 	hyphens: auto;
+	margin: 0;
 }
 
 .Track-artist {
@@ -124,13 +134,12 @@
 }
 
 .Controls {
-	position: fixed;
-	bottom: 2.5rem;
 	display: flex;
-	gap: 2rem;
+	gap: 1rem;
 	align-items: center;
 	justify-content: center;
-	padding: 1rem 2rem;
+	padding: 0.5rem 1rem;
+	margin-bottom: 2.5rem;
 	background-color: hsla(var(--background-hsl-a), 50%);
 	border: solid 0.25rem hsla(var(--secondary-accent-hsl-b), 15%);
 	border-radius: var(--border-radius-a);
