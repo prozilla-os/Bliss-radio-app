@@ -1,21 +1,22 @@
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import dts from "vite-plugin-dts";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
 		react(),
-		libInjectCss(),
+		// libInjectCss(),
+		cssInjectedByJsPlugin(),
 		dts({
 			include: ["src"],
 			outDir: "dist",
 			rollupTypes: true,
 			strictOutput: true,
 			pathsToAliases: false,
-			tsconfigPath: "tsconfig.json"
+			tsconfigPath: "tsconfig.json",
 		})
 	],
 	build: {
@@ -34,5 +35,5 @@ export default defineConfig({
 	},
 	server: {
 		port: 3000
-	}
+	},
 })

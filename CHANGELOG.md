@@ -1,5 +1,17 @@
 # @prozilla-os/bliss-radio
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependency @prozilla-os/core
+
+## 1.0.5
+
+### Patch Changes
+
+- Added CSS in JS injection
+
 ## 1.0.4
 
 ### Patch Changes
