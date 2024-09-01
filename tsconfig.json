@@ -1,25 +1,38 @@
 {
 	"compilerOptions": {
-	  "target": "ES2020",
-	  "useDefineForClassFields": true,
-	  "lib": ["ES2020", "DOM", "DOM.Iterable"],
-	  "module": "ESNext",
-	  "skipLibCheck": true,
-  
-	  /* Bundler mode */
-	  "moduleResolution": "bundler",
-	  "allowImportingTsExtensions": true,
-	  "isolatedModules": true,
-	  "moduleDetection": "force",
-	  "noEmit": true,
-	  "jsx": "react-jsx",
-  
-	  /* Linting */
-	  "strict": true,
-	  "noUnusedLocals": true,
-	  "noUnusedParameters": true,
-	  "noFallthroughCasesInSwitch": true
+		/* Language and Environment */
+		"target": "ESNext",
+		"jsx": "react-jsx",
+		
+		/* Modules */
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"types": ["vite/client", "node"],
+		"allowUmdGlobalAccess": true,
+		"resolveJsonModule": true,
+		
+		/* JavaScript Support */
+		"allowJs": true,
+		"checkJs": true,
+		
+		/* Emit */
+		"noEmit": true,
+		"noEmitOnError": true,
+		
+		/* Interop Constraints */
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		
+		/* Type Checking */
+		"strict": true,
+
+		/* Module resolution */
+		"baseUrl": "./",
 	},
-	"include": ["src", "vite.config.ts"]
-  }
-  
+	"include": ["src", "vite.config.ts"],
+	"exclude": [
+		"**/node_modules/**/*",
+		"**/dist/**/*",
+	]
+}

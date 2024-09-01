@@ -49,7 +49,7 @@ function App() {
 - [Discord][discord]
 - [Ko-fi][ko-fi]
 
-[github]: https://github.com/prozilla-os/ProzillaOS/tree/main/packages/apps/calculator
+[github]: https://github.com/prozilla-os/Bliss-radio-app
 [npm]: https://www.npmjs.com/package/@prozilla-os/bliss-radio
 [discord]: https://discord.gg/JwbyQP4tdz
 [ko-fi]: https://ko-fi.com/prozilla

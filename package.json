@@ -1,13 +1,26 @@
 {
 	"name": "@prozilla-os/bliss-radio",
 	"private": false,
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "tsc -b && vite build",
-		"preview": "vite preview"
+	"version": "1.0.1",
+	"author": {
+		"name": "Prozilla",
+		"email": "business@prozilla.dev",
+		"url": "https://prozilla.dev/"
 	},
+	"type": "module",
+	"main": "dist/main.js",
+	"types": "dist/main.d.ts",
+	"scripts": {
+		"start": "vite",
+		"build": "tsc && vite build",
+		"update": "changeset && changeset version",
+		"release": "changeset publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/prozilla-os/Bliss-radio-app.git"
+	},
+	"license": "MIT",
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.6.0",
 		"@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -17,7 +30,9 @@
 		"react-dom": "^18.3.1"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.27.7",
 		"@eslint/js": "^9.9.0",
+		"@types/node": "^22.5.2",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react": "^4.3.1",
@@ -27,6 +42,19 @@
 		"globals": "^15.9.0",
 		"typescript": "^5.5.3",
 		"typescript-eslint": "^8.0.1",
-		"vite": "^5.4.1"
+		"vite": "^5.4.1",
+		"vite-node": "^2.0.5",
+		"vite-plugin-dts": "^4.0.3",
+		"vite-plugin-lib-inject-css": "^2.1.1"
+	},
+	"files": [
+		"dist"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
 	}
 }
