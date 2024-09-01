@@ -1,0 +1,77 @@
+.Paragraph {
+	font-family: var(--body-font-family);
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	margin: 0.5rem 0;
+}
+
+.Button {
+	opacity: 100%;
+	position: relative;
+	display: inline-block;
+	padding: 0.75rem 1.5rem;
+	margin-top: 2rem;
+	color: hsl(var(--background-hsl-a));
+	background-color: hsl(var(--primary-accent-hsl-a));
+	border: solid 0.25rem hsl(var(--primary-accent-hsl-b));
+	border-radius: var(--border-radius-a);
+	box-shadow: 0.25rem 0.25rem 2rem 0 hsl(var(--background-hsl-a));
+	font-size: 1rem !important;
+	transform: none;
+	transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.Button:hover {
+	opacity: 75%;
+	color: hsl(var(--background-hsl-a));
+	transform: scale(95%);
+}
+
+.Section .Paragraph {
+	color: hsl(var(--foreground-hsl-b));
+}
+
+.Section .Paragraph a {
+	border-bottom: solid 2px hsl(var(--primary-accent-hsl-b));
+}
+
+.Section .Paragraph a:hover {
+	border-color: hsl(var(--primary-accent-hsl-a));
+}
+
+.Header, .Button {
+	font-family: var(--header-font-family);
+	font-size: 4.75rem;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.Section {
+	background-color: hsl(var(--secondary-accent-hsl-e));
+}
+
+.Section:nth-of-type(2n) {
+	background-color: hsl(var(--secondary-accent-hsl-d));
+}
+
+.Section:first-child {
+	padding-top: var(--total-header-height);
+}
+
+.Section > div {
+	display: flex;
+	gap: 2rem;
+	width: var(--max-page-width);
+	max-width: calc(100% - var(--horizontal-page-margin) * 2);
+	margin: 0 auto;
+	padding: 6rem 0;
+}
+
+@media screen and (max-width: 900px) {
+	.Section > div {
+		flex-direction: column;
+	}
+}

@@ -1,0 +1,152 @@
+.Container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background: hsl(var(--background-hsl-a));
+}
+
+.Track-info, .Controls {
+	z-index: 2;
+}
+
+.Track-info {
+	display: flex;
+	gap: 0.5rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 3rem;
+	max-width: calc(100vw - 5rem);
+}
+
+.Track-caption {
+	font-family: var(--subheader-font-family);
+	text-shadow: 0.5rem 0.5rem 1rem hsl(var(--background-hsl-a));
+	font-size: 1.25rem;
+	font-weight: 300;
+	letter-spacing: -0.025rem;
+	text-align: center;
+}
+
+.Track-caption > b {
+	font-weight: 600;
+}
+
+.Track-cover-button {
+	position: relative;
+	width: min(250px, calc(100vw - 5rem));
+	height: min(250px, calc(100vw - 5rem));
+	margin: 1rem 0;
+	border-radius: 9999px;
+	box-shadow: 0.5rem 0.5rem 1rem -0.5rem hsl(var(--background-hsl-a));
+	cursor: pointer;
+	scale: 100%;
+	transition: scale 400ms ease 150ms;
+}
+
+.Track-cover-button:hover {
+	scale: 105%;
+}
+
+.Track-cover-button > svg {
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40%;
+	height: auto !important;
+	color: hsl(var(--foreground-hsl-a));
+	filter: drop-shadow(0.5rem 0.5rem 1rem hsl(var(--background-hsl-a)));
+	transform: translate(-50%, -50%);
+	transition: opacity 400ms ease 150ms;
+}
+
+.Track-cover-button:hover > svg {
+	opacity: 1;
+}
+
+.Track-cover {
+	width: 100%;
+	height: 100%;
+	border-radius: 9999px;
+	aspect-ratio: 1;
+	object-fit: cover;
+	scale: 101%;
+	animation-play-state: running;
+	animation: spin 50000ms linear infinite forwards;
+}
+
+.Track-info.Paused .Track-cover {
+	animation-play-state: paused;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.Track-artist, .Track-title {
+	max-width: 100%;
+	text-align: center;
+	word-wrap: break-word;
+	hyphens: auto;
+}
+
+.Track-artist {
+	text-shadow: 0.5rem 0.5rem 2rem hsl(var(--background-hsl-a));
+	font-size: 3.5rem !important;
+	letter-spacing: -0.035rem;
+}
+
+.Track-title {
+	text-shadow: 0.5rem 0.5rem 1rem hsl(var(--background-hsl-a));
+	font-size: 2.5rem !important;
+	font-weight: 200 !important;
+	letter-spacing: -0.025rem;
+}
+
+@media screen and (max-width: 500px) {
+	.Track-artist {
+		font-size: 2em !important;
+	}
+
+	.Track-title {
+		font-size: 1.5rem !important;
+	}
+}
+
+.Controls {
+	position: fixed;
+	bottom: 2.5rem;
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem 2rem;
+	background-color: hsla(var(--background-hsl-a), 50%);
+	border: solid 0.25rem hsla(var(--secondary-accent-hsl-b), 15%);
+	border-radius: var(--border-radius-a);
+	box-shadow: 0.25rem 0.25rem 2rem 0 hsl(var(--background-hsl-a));
+	backdrop-filter: blur(5rem);
+}
+
+.Controls button {
+	width: 2.5rem;
+	height: 2.5rem;
+	color: hsl(var(--foreground-hsl-a));
+	background: none;
+	transition: transform 200ms ease-in-out;
+	transform: none;
+}
+
+.Controls button:hover {
+	transform: scale(110%);
+}

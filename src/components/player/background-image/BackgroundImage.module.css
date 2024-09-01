@@ -1,0 +1,10 @@
+.Image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	filter: blur(calc(var(--blur-factor) * 0.02px)) brightness(75%);
+	pointer-events: none;
+	object-fit: cover;
+}
