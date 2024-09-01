@@ -2,7 +2,7 @@
 
 ## About 
 
-`@prozilla-os/bliss-radio` is a Radio app based on https://blissradio.eu/.
+`@prozilla-os/bliss-radio` is a Radio app based on https://blissradio.eu/ for ProzillaOS.
 
 ## Installation
 
