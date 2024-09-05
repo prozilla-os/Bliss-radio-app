@@ -38,6 +38,7 @@
 	width: 100%;
 	height: 100%;
 	font-size: 18px;
+	box-shadow: inset 0 0.5rem 1rem 0 hsl(var(--background-hsl-a));
 }
 
 .Container * {
@@ -112,7 +113,7 @@
 .Track-info .Track-cover-button {
 	position: relative;
 	width: 200px;
-	height: 200px;
+	max-height: 200px;
 	margin: 1rem 0;
 	border-radius: 9999px;
 	box-shadow: 0.5rem 0.5rem 1rem -0.5rem hsl(var(--background-hsl-a));

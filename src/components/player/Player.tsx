@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Player.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,7 @@ import { FETCH_TRACK_INFO_INTERVAL, DEFAULT_TRACK_INFO, AUDIO_STREAM_URL, AUDIO_
 import AudioVisualizer from "./audio-visualizer/audioVisualizer";
 import { NAME } from "../../constants/branding";
 import { formatTrackArtist, formatTrackTitle } from "../../utils/formatting";
-import { useClassNames } from "@prozilla-os/core";
+import { App, useClassNames, useSystemManager } from "@prozilla-os/core";
 
 export interface TrackInfo {
 	track: {
@@ -37,7 +37,14 @@ function updateMetadata(title: string | null, artist: string | null, album: stri
 	}
 }
 
-export default function Player({ ...props }) {
+interface PlayerProps {
+	app?: App;
+	setTitle?: Dispatch<SetStateAction<string>>;
+	[key: string]: unknown;
+}
+
+export default function Player({ app, setTitle, ...props }: PlayerProps) {
+	const { windowsConfig } = useSystemManager();
 	const ref = useRef<HTMLDivElement>(null);
 	const [trackInfo, setTrackInfo] = useState<TrackInfo | null>(null);
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -47,13 +54,23 @@ export default function Player({ ...props }) {
 		fetch(AUDIO_DATA_URL) // ty
 			.then((response) => response.json())
 			.then((data) => {
-				const trackInfo = {
+				const newTrackInfo: TrackInfo = {
 					...DEFAULT_TRACK_INFO,
 					...data,
 				};
 
-				setTrackInfo(trackInfo);
-				updateMetadata(trackInfo.title, trackInfo.artist, NAME, trackInfo.art);
+				if (trackInfo && newTrackInfo.track.title == trackInfo.track.title && newTrackInfo.track.artist == trackInfo.track.artist)
+					return;
+
+				setTrackInfo(newTrackInfo);
+				updateMetadata(newTrackInfo.track.title, newTrackInfo.track.artist, NAME, newTrackInfo.track.art);
+
+				if (newTrackInfo.track.title == DEFAULT_TRACK_INFO.track.title) {
+					setTitle?.(app?.name ?? DEFAULT_TRACK_INFO.track.artist);
+				} else {
+					const titleText = `${newTrackInfo.track.artist} - ${newTrackInfo.track.title}`;
+					setTitle?.(titleText);
+				}
 			})
 			.catch((error) => console.error(error));
 	};
@@ -99,9 +116,9 @@ export default function Player({ ...props }) {
 		setIsPlaying(!isPlaying);
 	}, [audio, isPlaying]);
 
-	const trackCoverUrl = trackInfo?.track.art ?? DEFAULT_TRACK_INFO.art; 
-	const trackTitle = formatTrackTitle(trackInfo?.track.title ?? DEFAULT_TRACK_INFO.title) as string;
-	const trackArtist = formatTrackArtist(trackInfo?.track.artist ?? DEFAULT_TRACK_INFO.artist) as string;
+	const trackCoverUrl = trackInfo?.track.art ?? DEFAULT_TRACK_INFO.track.art; 
+	const trackTitle = formatTrackTitle(trackInfo?.track.title ?? DEFAULT_TRACK_INFO.track.title) as string;
+	const trackArtist = formatTrackArtist(trackInfo?.track.artist ?? DEFAULT_TRACK_INFO.track.artist) as string;
 	const streamer = trackInfo?.streamer?.is_live ? trackInfo?.streamer?.name : null;
 
 	return <div ref={ref} className={useClassNames([styles.Container], "BlissRadio", "Player")} {...props}>
